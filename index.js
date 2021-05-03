@@ -25,12 +25,17 @@ class BundleClean {
                 if (stats.chunks) {
                     Object.keys(stats.chunks).forEach(function(name) {
                         let chunk = stats.chunks[name];
-                        if (chunk && chunk[0] && chunk[0].path) {
-                            console.log('removing', chunk[0].path);
-                            try {
-                                fs.unlinkSync(chunk[0].path);
-                            } catch(e) {
-                                console.log(e.message);
+                        if (chunk) {
+                            for (let i = 0; i < chunk.length; i++) {
+                                let _chunk = chunk[i]
+                                if (_chunk && _chunk.path) {
+                                    console.log('removing', _chunk.path);
+                                    try {
+                                        fs.unlinkSync(_chunk.path);
+                                    } catch(e) {
+                                        console.log(e.message);
+                                    }
+                                }
                             }
                         }
                     })
